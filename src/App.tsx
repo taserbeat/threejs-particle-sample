@@ -35,7 +35,19 @@ document.body.appendChild(renderer.domElement);
  */
 
 // ジオメトリ
-const geometry = new THREE.SphereGeometry(1, 16, 32);
+const particlesGeometry = new THREE.BufferGeometry();
+const count = 1000;
+
+const positionArray = new Float32Array(count * 3);
+
+for (let i = 0; i < count * 3; i++) {
+  positionArray[i] = Math.random();
+}
+
+particlesGeometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(positionArray, 3)
+);
 
 // マテリアル
 const pointsMaterial = new THREE.PointsMaterial({
@@ -43,7 +55,7 @@ const pointsMaterial = new THREE.PointsMaterial({
 });
 
 // メッシュ化
-const particles = new THREE.Points(geometry, pointsMaterial);
+const particles = new THREE.Points(particlesGeometry, pointsMaterial);
 
 scene.add(particles);
 
