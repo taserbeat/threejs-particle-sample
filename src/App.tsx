@@ -44,12 +44,16 @@ const particlesTexture = textureLoader.load(textureParticles1);
 
 // ジオメトリ
 const particlesGeometry = new THREE.BufferGeometry();
-const count = 5000;
+const count = 10000;
 
 const positionArray = new Float32Array(count * 3);
 
+const colorArray = new Float32Array(count * 3);
+
 for (let i = 0; i < count * 3; i++) {
   positionArray[i] = (Math.random() - 0.5) * 10;
+
+  colorArray[i] = Math.random();
 }
 
 particlesGeometry.setAttribute(
@@ -57,13 +61,10 @@ particlesGeometry.setAttribute(
   new THREE.BufferAttribute(positionArray, 3)
 );
 
-// 球を作成してみる
-const cube = new THREE.Mesh(
-  new THREE.SphereGeometry(),
-  new THREE.MeshNormalMaterial()
+particlesGeometry.setAttribute(
+  "color",
+  new THREE.BufferAttribute(colorArray, 3)
 );
-
-scene.add(cube);
 
 // マテリアル
 const pointsMaterial = new THREE.PointsMaterial({
@@ -73,6 +74,8 @@ const pointsMaterial = new THREE.PointsMaterial({
   // alphaTest: 0.001, // 透過度
   // depthTest: false,
   depthWrite: false,
+  vertexColors: true,
+  blending: THREE.AdditiveBlending,
 });
 
 // メッシュ化
