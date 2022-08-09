@@ -4,6 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import GUI from "lil-gui";
 
 import "./App.css";
+import textureParticles1 from "./textures/particles/1.png";
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
@@ -34,6 +35,9 @@ document.body.appendChild(renderer.domElement);
  * テクスチャ設定
  */
 
+const textureLoader = new THREE.TextureLoader();
+const particlesTexture = textureLoader.load(textureParticles1);
+
 /**
  * パーティクルを作成する
  */
@@ -55,7 +59,10 @@ particlesGeometry.setAttribute(
 
 // マテリアル
 const pointsMaterial = new THREE.PointsMaterial({
-  size: 0.02,
+  size: 0.15,
+  transparent: true,
+  alphaMap: particlesTexture,
+  alphaTest: 0.001,
 });
 
 // メッシュ化
