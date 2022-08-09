@@ -34,6 +34,19 @@ document.body.appendChild(renderer.domElement);
  * テクスチャ設定
  */
 
+// ジオメトリ
+const geometry = new THREE.SphereGeometry(1, 16, 32);
+
+// マテリアル
+const pointsMaterial = new THREE.PointsMaterial({
+  size: 0.02,
+});
+
+// メッシュ化
+const particles = new THREE.Points(geometry, pointsMaterial);
+
+scene.add(particles);
+
 /**
  * パーティクルを作成する
  */
