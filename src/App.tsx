@@ -34,6 +34,10 @@ document.body.appendChild(renderer.domElement);
  * テクスチャ設定
  */
 
+/**
+ * パーティクルを作成する
+ */
+
 // ジオメトリ
 const particlesGeometry = new THREE.BufferGeometry();
 const count = 1000;
@@ -58,10 +62,6 @@ const pointsMaterial = new THREE.PointsMaterial({
 const particles = new THREE.Points(particlesGeometry, pointsMaterial);
 
 scene.add(particles);
-
-/**
- * パーティクルを作成する
- */
 
 // マウス操作
 const controls = new OrbitControls(camera, renderer.domElement);
