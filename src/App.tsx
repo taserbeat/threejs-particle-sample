@@ -57,12 +57,22 @@ particlesGeometry.setAttribute(
   new THREE.BufferAttribute(positionArray, 3)
 );
 
+// 球を作成してみる
+const cube = new THREE.Mesh(
+  new THREE.SphereGeometry(),
+  new THREE.MeshNormalMaterial()
+);
+
+scene.add(cube);
+
 // マテリアル
 const pointsMaterial = new THREE.PointsMaterial({
   size: 0.15,
-  transparent: true,
-  alphaMap: particlesTexture,
-  alphaTest: 0.001,
+  transparent: true, // テクスチャの透過を有効にする
+  alphaMap: particlesTexture, // 透過有りでテクスチャを貼り付ける
+  // alphaTest: 0.001, // 透過度
+  // depthTest: false,
+  depthWrite: false,
 });
 
 // メッシュ化
